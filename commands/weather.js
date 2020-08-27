@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
             .addField('Temperature', `${current.temperature}°`, true)
             .addField('Wind', current.winddisplay, true)
             .addField('Feels like', `${current.feelslike}°`, true)
-            .addField('Humidity', `${current.humidity}%`, true)
+            .addField('Humidity', `${current.humidity}%`, true) //  b
 
 
         message.channel.send(weatherinfo)
