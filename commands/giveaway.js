@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
     name: "giveaway",
     description: "Starts a giveaway.",
-    usage: "c!giveaway",
+    usage: "c!giveaway {channel} {time} {winnerlimit} {title}",
     accessableby: "Staff",
     aliases: []
 }
