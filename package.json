@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/xgoje/coffeeclutter#readme",
   "dependencies": {
+    "discord-giveaways": "^4.2.1",
     "discord.js": "^12.3.1",
-    "got": "^11.5.2"
+    "got": "^11.5.2",
+    "ms": "^2.1.2"
   }
 }

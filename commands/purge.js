@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
     const messageArray = message.content.split(' ');
 
     if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send('you need the `MANAGE_MESSAGES` permission to peform this command');
-    
+
     let deleteAmount;
 
     if (isNaN(args[0]) || parseInt(args[0]) <= 0) { return message.reply('please provide a number') }
