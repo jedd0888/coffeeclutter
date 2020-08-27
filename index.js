@@ -4,13 +4,17 @@ const botsettings = require('./botsettings.json');
 const bot = new Discord.Client({ disableEveryone: true });
 
 bot.on("guildMemberAdd", member => {
-    const welcomeChannel = member.guild.channels.cache.find(channel => channel.name === 'welcome')
+    const channelID = '620192849706876938'
+
+    const welcomeChannel = member.guild.channels.cache.find(channelWelcomeID)
     welcomeChannel.send(`Hiya! Welcome to CoffeeClutter, ${member}! Check out <#620195464465350657> to get started.`)
     //Hiya! Welcome to CoffeeClutter, @(SDS)Soda! Check out #rules-and-precautions to get started.
 })
 
 bot.on("guildMemberRemove", member => {
-    const welcomeChannel = member.guild.channels.cache.find(channel => channel.name === 'bot-logs')
+    const channelID = '633412141919109120'
+
+    const welcomeChannel = member.guild.channels.cache.find(channelID)
     welcomeChannel.send(`${member} has left.`)
 })
 

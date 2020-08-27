@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
 
     let giveawayDuration = args[1];
 
-    if (!giveawayDuration || isNaN(ms(giveawayDuration))) return message.channel.send('Pleae provide a valid duration');
+    if (!giveawayDuration || isNaN(ms(giveawayDuration))) return message.channel.send('Please provide a valid duration.');
 
     let giveawayWinners = args[2];
 
