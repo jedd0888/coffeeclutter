@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
         .addFields(
             { name: `Cases`, value: covidStats.cases.toLocaleString(), inline: true },
             { name: `Cases Today`, value: covidStats.todayCases.toLocaleString(), inline: true },
-            { name: `Deaths`, value: covidStats.death.toLocaleString(), inline: true },
+            { name: `Deaths`, value: covidStats.deaths.toLocaleString(), inline: true },
             { name: `Deaths Today`, value: covidStats.todayDeaths.toLocaleString(), inline: true },
             { name: `Recovered`, value: covidStats.recovered.toLocaleString(), inline: true },
             { name: `Recovered Today`, value: covidStats.todayRecovered.toLocaleString(), inline: true },
