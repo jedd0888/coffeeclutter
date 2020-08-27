@@ -23,19 +23,6 @@ require("./util/eventHandler")(bot)
 
 const fs = require("fs");
 
-const { GiveawaysManager } = require('discord-giveaways');
-
-bot.giveawaysManager = new GiveawaysManager(bot, {
-    storage: "./giveaways.json",
-    updateCountdownEvery: 5000,
-    default: {
-        botsCanWin: false,
-        exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
-        embedColor: "#FF0000",
-        reaction: "🎉"
-    }
-});
-
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
