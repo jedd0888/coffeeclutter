@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     if (!helpArgs[0]) {
         var embed = new Discord.MessageEmbed()
             .setAuthor(`List of avaliable commands:`)
-            .setDescription('```ban | bobux | calculate | covid | dankmeme | deletewarns | facebookmeme | giveaway | kick | meme | purge | reroll | warn | warnings | weather```')
+            .setDescription('```ban | bobux | covid | dankmeme | facebookmeme | kick | meme | purge```')
             .addFields({ name: 'Prefix', value: '```c!```', inline: true })
             .setColor('#C73B0F')
 
