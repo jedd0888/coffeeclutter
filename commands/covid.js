@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
 
     return message.channel.send(new Discord.MessageEmbed()
         .setTitle('COVID-19 Stats')
-        .setColour('#C73B0F')
+        .setColor('#C73B0F')
         .addFields(
             { name: `Cases`, value: covidStats.cases.toLocaleString(), inline: true },
             { name: `Cases Today`, value: covidStats.todayCases.toLocaleString(), inline: true },
