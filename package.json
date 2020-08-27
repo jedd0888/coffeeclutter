@@ -1,6 +1,10 @@
 {
   "name": "coffeeclutter",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.8.0",
+    "npm": "6.14.7"
+  },
   "description": "Bot for the CoffeeClutter server and other servers",
   "main": "index.js",
   "scripts": {
