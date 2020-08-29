@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     let user = message.mentions.members.first()
     if (!user) return message.channel.send("user is needed")
 
-    let name = args.slice(1).join(" ")
+    let name = args.slice(1).toUpperCase(" ")
     if (!name) return message.channel.send("new nickname is needed")
 
     user.setNickname(name)
