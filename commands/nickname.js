@@ -1,18 +1,13 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, message, args) => {
-    let perm = message.member.hasPermission("MANAGE_NICKNAMES")
-    if (!perm) return message.channel.send("you need the `MANAGE_NICKNAMES` permission to use this")
+    if(!message.member.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('you need the `MANAGE_NICKNAMES` to perform this command');
 
-    let user = message.mentions.members.first()
-    if (!user) return message.channel.send("user is needed")
+    const member = message.mentions.members.first();
 
-    let name = args.slice(1).join(" ")
-    if (!name) return message.channel.send("new nickname is needed")
-
-    user.setNickname(name)
-
-    message.channel.send(`${user.user.tag}'s name have changed to ${name}`)
+    if(!member) return message.channel.send('user is needed to change the nickname');
+    if(!args.slice(1).join(" ")) return message.channel.send(`please include what would you like ${member}'s nickname to be`)
+    member.setNickname(args.slice(1).join(" ")), message.channel.send(`successfully set ${member} nickname to ${args.slice(1).join(" ")}`);
 }
 
 module.exports.config = {
