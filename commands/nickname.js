@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const botsettings = require('./botsettings.json');
 
 module.exports.run = async (bot, message) => {
     const args = message.content.slice(botsettings.prefix.length).split(/ +/)
