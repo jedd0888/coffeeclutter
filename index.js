@@ -56,6 +56,9 @@ bot.on("message", async message => {
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
     if (commandfile) commandfile.run(bot, message, args)
 
+    if (message.content.toLowerCase() === 'l')
+        message.channel.send("ha")
+
 })
 
 bot.login(process.env.token);
