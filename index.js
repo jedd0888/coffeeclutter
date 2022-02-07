@@ -1,62 +1,66 @@
-const Discord = require('discord.js');
-const botsettings = require('./botsettings.json');
+const {
+    Client,
+    Intents,
+    Collection
+} = require('discord.js');
+const {
+    prefix,
+    token
+} = require('./botsettings.json');
+const {
+    readdir
+} = require("fs");
 
-const bot = new Discord.Client({ disableEveryone: true });
+const bot = new Client({
+    shards: "auto",
+    allowedMentions: {
+        parse: [],
+        repliedUser: false
+    },
+    partials: [],
+    // restTimeOffset: 0,
+    failIfNotExists: true,
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_MESSAGES
+    ]
+});
 
-bot.on("guildMemberAdd", member => {
-    const channelID = '620192849706876938'
+require("./util/eventHandler")(bot);
 
-    const welcomeChannel = member.guild.channels.cache.find(channelWelcomeID)
-    welcomeChannel.send(`Hiya! Welcome to CoffeeClutter, ${member}! Check out <#620195464465350657> to get started.`)
-    //Hiya! Welcome to CoffeeClutter, @(SDS)Soda! Check out #rules-and-precautions to get started.
-})
+bot.commands = new Collection();
+bot.aliases = new Collection();
 
-bot.on("guildMemberRemove", member => {
-    const channelID = '633412141919109120'
+readdir("./commands/", (err, files) => {
+    if (err) console.log(err);
 
-    const welcomeChannel = member.guild.channels.cache.find(channelID)
-    welcomeChannel.send(`${member} has left.`)
-})
-
-
-require("./util/eventHandler")(bot)
-
-const fs = require("fs");
-
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
-
-fs.readdir("./commands/", (err, files) => {
-
-    if (err) console.log(err)
-
-    let jsfile = files.filter(f => f.split(".").pop() === "js")
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
     if (jsfile.length <= 0) {
-        return console.log("[LOGS] Couldn't Find Commands!");
-    }
+        return console.log("[LOGS] Couldn't Find Commands!")
+    };
 
     jsfile.forEach((f, i) => {
         let pull = require(`./commands/${f}`);
         bot.commands.set(pull.config.name, pull);
         pull.config.aliases.forEach(alias => {
             bot.aliases.set(alias, pull.config.name)
-        });
-    });
+        })
+    })
 });
 
-bot.on("message", async message => {
+bot.on("messageCreate", async message => {
     if (message.author.bot || message.channel.type === "dm") return;
 
-    let prefix = botsettings.prefix;
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = message.content.substring(message.content.indexOf(' ') + 1);
+    // let messageArray = message.content.split(" ");
+    // let cmd = messageArray[0];
+    // let args = message.content.substring(message.content.indexOf(' ') + 1);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift()?.toLowerCase();
 
     if (!message.content.startsWith(prefix)) return;
-    let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
+    let commandfile = bot.commands.get(cmd) || bot.commands.get(bot.aliases.get(cmd));
     if (commandfile) commandfile.run(bot, message, args)
+});
 
-})
-
-bot.login(process.env.token);
-// bot.login(botsettings.token);
+bot.login(process.env.token || token);

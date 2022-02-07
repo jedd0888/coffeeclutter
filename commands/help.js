@@ -13,12 +13,20 @@ module.exports.run = async (bot, message, args) => {
     //Normal usage of (prefix)help without any args. (Shows all of the commands and you should set the commands yourself)
     if (!helpArgs[0]) {
         var embed = new Discord.MessageEmbed()
-            .setAuthor(`List of avaliable commands:`)
-            .setDescription('```avatar | bobux | covid | dankmeme | facebookmeme | giveaway | meme | purge```')
-            .addFields({ name: 'Prefix', value: '```c!```', inline: true })
+            .setAuthor({
+                name: `List of avaliable commands:`
+            })
+            .setDescription('```avatar | bobux | covid | dankmeme | facebookmeme | meme | purge```')
+            .addFields({
+                name: 'Prefix',
+                value: `\`\`\`${require(`${process.cwd()}/botsettings.json`).prefix}\`\`\``,
+                inline: true
+            })
             .setColor('#C73B0F')
 
-        message.channel.send(embed);
+        message.reply({
+            embeds: [embed]
+        });
     }
 
     //Reads the moudle.exports.config (This line of code is on commands folder, each command will read automaticly) by the second argument (the command name) and shows the information of it.
@@ -29,7 +37,9 @@ module.exports.run = async (bot, message, args) => {
 
             command = bot.commands.get(command);
             var embed = new Discord.MessageEmbed()
-                .setAuthor(`${command.config.name} Command`)
+                .setAuthor({
+                    name: `${command.config.name} Command`
+                })
                 .setDescription(`
             **Description:** ${command.config.description || "There is no description for this command."}
             **Usage:** ${command.config.usage || "No usage."}
@@ -38,15 +48,17 @@ module.exports.run = async (bot, message, args) => {
             `)
                 .setColor('#C73B0F')
 
-            message.channel.send(embed);
+            message.reply({
+                embeds: [embed]
+            })
         }
     }
-}
+};
 
 module.exports.config = {
     name: "help",
     description: "",
-    usage: "?help",
+    usage: "help",
     accessableby: "Members",
     aliases: []
-}
+};

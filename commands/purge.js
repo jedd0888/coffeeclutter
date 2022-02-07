@@ -8,7 +8,9 @@ module.exports.run = async (bot, message, args) => {
 
     let deleteAmount;
 
-    if (isNaN(args[0]) || parseInt(args[0]) <= 0) { return message.reply('please provide a number') }
+    if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
+        return message.reply('please provide a number')
+    }
 
     if (parseInt(args[0]) > 100) {
         return message.reply('you can only delete 100 messages at a time')
@@ -16,8 +18,12 @@ module.exports.run = async (bot, message, args) => {
         deleteAmount = parseInt(args[0]);
     }
 
-    message.channel.bulkDelete(deleteAmount + 1, true);
+    await message.channel.bulkDelete(deleteAmount, true);
     message.reply(`successfully deleted **${deleteAmount}** messages.`)
+        .then(msg => {
+            setTimeout(() => msg.delete(), 3000)
+        })
+        .catch(e => console.error(e))
 }
 
 module.exports.config = {

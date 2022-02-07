@@ -16,15 +16,19 @@ module.exports.run = async (bot, message, args) => {
         embed.setURL(`${memeUrl}`)
         embed.setImage(memeImage)
         embed.setColor('#C73B0F')
-        embed.setFooter(`👍 ${memeUpvotes} 👎 ${memeDownvotes} | 💬 ${memeNumComments}`)
-        message.channel.send(embed);
+        embed.setFooter({
+            text: `👍 ${memeUpvotes} 👎 ${memeDownvotes} | 💬 ${memeNumComments}`
+        })
+        message.reply({
+            embeds: [embed]
+        });
     })
 }
 
 module.exports.config = {
     name: "dankmeme",
     description: "Grabs a **dank** meme from the r/dankmemes subreddit.",
-    usage: "c!dankmeme",
+    usage: "dankmeme",
     accessableby: "Members",
     aliases: ["dm"]
 }
